@@ -14,6 +14,7 @@ export function SearchPage() {
         total,
         totalPages,
         currentPage,
+        textToFilter,
         handlePageChange,
         handleSearch,
         handleTextFilter
@@ -27,7 +28,11 @@ export function SearchPage() {
         <main>
             <title>{title}</title>
             <meta name="description" content="Explora miles de oportunidades laborales en el sector tecnológico. Encuentra tu próximo empleo en DevJobs" />
-            <SearchFormSection onSearch={handleSearch} onTextFilter={handleTextFilter} />
+            <SearchFormSection
+                initialText={textToFilter}
+                onSearch={handleSearch}
+                onTextFilter={handleTextFilter}
+            />
             <section>
                 <h2 className="jobs-listings-title">Resultados de búsqueda</h2>
                 {

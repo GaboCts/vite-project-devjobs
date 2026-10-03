@@ -1,12 +1,8 @@
 import { useState, useRef } from "react";
 
-let timeoutId = null
-
 export function useSearchForm ({idText, idTechnology, idLocation, idExperienceLevel, onSearch, onTextFilter}) {
-    const counterRef = useRef(0)
+    const timeoutId = useRef(null)
     const [searchText, setSearchText] = useState("")
-
-    console.log("Usado el ref tantas veces: ", counterRef.current)
     
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -28,16 +24,15 @@ export function useSearchForm ({idText, idTechnology, idLocation, idExperienceLe
     }
 
     const handleTextChange = (event) => {
-        counterRef.current += 1
         
         const text = event.target.value
         setSearchText(text)
 
-        if (timeoutId) {
-            clearTimeout(timeoutId)
+        if (timeoutId.current) {
+            clearTimeout(timeoutId.current)
         }
 
-        timeoutId = setTimeout(() => {
+        timeoutId.current = setTimeout(() => {
             onTextFilter(text)
         }, 500)
     }

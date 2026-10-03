@@ -1,16 +1,24 @@
-import { useId } from 'react'
+import { useId, useRef } from 'react'
 import { useSearchForm } from '../hooks/useSearchForm'
 
-export function SearchFormSection({ onTextFilter, onSearch }) {
+export function SearchFormSection({ onTextFilter, onSearch, initialText }) {
     const idText = useId()
     const idTechnology = useId()
     const idLocation = useId()
     const idExperienceLevel = useId()
+    const inputRef = useRef()
 
     const {
         handleSubmit,
         handleTextChange,
     } = useSearchForm({idText, idTechnology, idLocation, idExperienceLevel, onSearch, onTextFilter})
+
+    const handleClearInput = (event) => {
+        event.preventDefault()
+
+        inputRef.current.value = ""
+        onTextFilter("")
+    }
 
     return (
         <section className="jobs-search">
@@ -27,9 +35,15 @@ export function SearchFormSection({ onTextFilter, onSearch }) {
                         <path d="M21 21l-6 -6" />
                     </svg>
 
-                    <input name={idText} id="empleos-search-input" type="text"
+                    <input
+                        ref={inputRef}
+                        name={idText}
+                        id="empleos-search-input"
+                        type="text"
                         onChange={handleTextChange}
+                        defaultValue={initialText}
                         placeholder="Buscar trabajos, empresas o habilidades" />
+                    <button onClick={handleClearInput}>🗙</button>
                 </div>
 
                 <div className="search-filters">
