@@ -14,7 +14,7 @@ function JobSection({ title, content }) {
             </h2>
 
             <div
-                className={`${styles.sectionContent} prose`}
+                className={`${styles.sectionContent} ${styles.prose}`}
                 dangerouslySetInnerHTML={{
                     __html: html
                 }}
