@@ -1,5 +1,3 @@
-import { useEffect } from 'react'
-
 import { Pagination } from '../components/Pagination.jsx'
 import { SearchFormSection } from '../components/SearchFormSection.jsx'
 import { JobsListings } from '../components/JobsListings.jsx'
