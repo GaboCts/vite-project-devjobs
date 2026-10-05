@@ -5,7 +5,7 @@ import { useFilters } from '../hooks/useFilters.jsx'
 import { LottieAnimation } from '../components/LottieAnimation.jsx'
 import Loading from '../assets/loadingLottie.json'
 
-export function SearchPage() {
+export default function SearchPage() {
     const {
         loading,
         jobs,
