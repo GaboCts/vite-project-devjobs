@@ -100,6 +100,7 @@ export function useFilters() {
         totalPages,
         currentPage,
         textToFilter,
+        filters,
         handlePageChange,
         handleSearch,
         handleTextFilter

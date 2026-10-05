@@ -13,6 +13,7 @@ export default function SearchPage() {
         totalPages,
         currentPage,
         textToFilter,
+        filters,
         handlePageChange,
         handleSearch,
         handleTextFilter
@@ -28,6 +29,9 @@ export default function SearchPage() {
             <meta name="description" content="Explora miles de oportunidades laborales en el sector tecnológico. Encuentra tu próximo empleo en DevJobs" />
             <SearchFormSection
                 initialText={textToFilter}
+                technology={filters.technology}
+                type={filters.location}
+                level={filters.experienceLevel}
                 onSearch={handleSearch}
                 onTextFilter={handleTextFilter}
             />
