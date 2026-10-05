@@ -480,6 +480,7 @@ article {
 }
 
 .nav-link-active {
-    color: yellow;
+    color: #09f;
     pointer-events: none;
+    border-bottom: solid #09f 2px;
 }
