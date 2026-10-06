@@ -64,12 +64,32 @@ export function useFilters() {
 
     useEffect(() => {
         setSearchParams((params) => {
-            if (textToFilter) params.set('text', textToFilter)
-            if (filters.technology) params.set('technology', filters.technology)
-            if (filters.location) params.set('type', filters.location)
-            if (filters.experienceLevel) params.set('level', filters.experienceLevel)
+            if (textToFilter) {
+                params.set('text', textToFilter)
+            } else {
+                params.delete('text')
+            }
+            if (filters.technology) {
+                params.set('technology', filters.technology)
+            } else {
+                params.delete('technology')
+            }
+            if (filters.location) {
+                params.set('type', filters.location)
+            } else {
+                params.delete('type')
+            }
+            if (filters.experienceLevel) {
+                params.set('level', filters.experienceLevel)
+            } else {
+                params.delete('level')
+            }
     
-            if (currentPage > 1) params.set('page', currentPage)
+            if (currentPage > 1) {
+                params.set('page', currentPage)
+            } else {
+                params.delete('page')
+            }
             
             return params
         })
