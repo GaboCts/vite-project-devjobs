@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router'
 import { Link } from '../components/Link'
+import { useAuth } from '../context/AuthContext'
 import snarkdown from 'snarkdown'
 import styles from './Detail.module.css'
 
@@ -40,7 +41,7 @@ function DetailPageBreadCrumb ({ job }) {
     )
 }
 
-function DetailPageHader ({ job, isLoggedIn}) {
+function DetailPageHader ({ job }) {
     return (
         <>
             <header className={styles.header}>
@@ -52,14 +53,21 @@ function DetailPageHader ({ job, isLoggedIn}) {
                 </p>
             </header>
 
-            <button disabled={!isLoggedIn} className={styles.applyButton}>
-                {isLoggedIn ? "Aplicar ahora" : "Inicia sesión para aplicar"}
-            </button>
+            <DetailApplyButton />
         </>
     )
 }
 
-export default function JobDetail({ isLoggedIn }) {
+function DetailApplyButton () {
+    const { isLoggedIn } = useAuth()
+    return (
+        <button disabled={!isLoggedIn} className={styles.applyButton}>
+            {isLoggedIn ? "Aplicar ahora" : "Inicia sesión para aplicar"}
+        </button>
+    )
+}
+
+export default function JobDetail() {
     const { jobId } = useParams()
     const navigate = useNavigate()
 
@@ -115,6 +123,7 @@ export default function JobDetail({ isLoggedIn }) {
     return (
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1rem' }}>
             <DetailPageBreadCrumb job={ job } />
+            <DetailPageHader job={ job } />
 
 
             <JobSection title="Descripción del puesto" content={job.content.description} />
