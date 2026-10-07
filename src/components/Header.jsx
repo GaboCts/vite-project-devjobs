@@ -3,10 +3,30 @@ import { Link } from './Link'
 import { useAuthStore } from '../store/authStore'
 import { useFavoritesStore } from '../store/favoritesStore'
 
+function HeaderProfileFavorites () {
+    const favorites = useFavoritesStore((state) => state.favorites)
+    const numberOfFavorites = favorites.length
+    return (
+        <NavLink
+            className={({ isActive }) => isActive ? 'nav-link-active' : ''}
+            to="/profile">
+            Profile ❤️ { numberOfFavorites }
+        </NavLink>
+    )
+}
+
+const HeaderUSerButton = () => {
+    const { isLoggedIn, login, logout} = useAuthStore()
+
+    return (
+        isLoggedIn
+            ? <button onClick={logout}>Cerrar sesión</button>
+            : <button onClick={login} >Iniciar sesión</button>
+    )
+}
+
 export function Header() {
     const { isLoggedIn } = useAuthStore()
-    const { countFavorites } = useFavoritesStore()
-    const numberOfFavorites = countFavorites()
 
     return (
         <header>
@@ -30,26 +50,12 @@ export function Header() {
 
                 {
                     isLoggedIn && (
-                        <NavLink
-                            className={({ isActive }) => isActive ? 'nav-link-active' : ''}
-                            to="/profile">
-                                Profile {numberOfFavorites} ❤️
-                        </NavLink>
+                        <HeaderProfileFavorites />
                     )
                 }
             </nav>
 
             <HeaderUSerButton />
         </header>
-    )
-}
-
-const HeaderUSerButton = () => {
-    const { isLoggedIn, login, logout} = useAuthStore()
-
-    return (
-        isLoggedIn
-            ? <button onClick={logout}>Cerrar sesión</button>
-            : <button onClick={login} >Iniciar sesión</button>
     )
 }
