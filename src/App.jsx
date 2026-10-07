@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState } from 'react'
+import { lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router'
 
 import { Header } from './components/Header.jsx'
