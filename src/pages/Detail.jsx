@@ -62,6 +62,7 @@ function DetailPageHader ({ job }) {
 
 function DetailApplyButton () {
     const { isLoggedIn } = useAuthStore()
+
     return (
         <button disabled={!isLoggedIn} className={styles.applyButton}>
             {isLoggedIn ? "Aplicar ahora" : "Inicia sesión para aplicar"}
@@ -70,10 +71,11 @@ function DetailApplyButton () {
 }
 
 function DetailFavoriteButton ({ jobId }) {
+    const { isLoggedIn } = useAuthStore()
     const { isFavorite, toggleFavorite } = useFavoritesStore()
 
     return (
-        <button onClick={() => toggleFavorite(jobId)}>
+        <button disabled={!isLoggedIn} onClick={() => toggleFavorite(jobId)}>
             {isFavorite(jobId) ? '❤️' : '🤍'}
         </button>
     )
