@@ -15,13 +15,19 @@ function HeaderProfileFavorites () {
     )
 }
 
-const HeaderUSerButton = () => {
-    const { isLoggedIn, login, logout} = useAuthStore()
+const HeaderUserButton = () => {
+    const { isLoggedIn, logout } = useAuthStore()
+    const { clearFavorites } = useFavoritesStore()
+
+    const handleLogout = () => {
+        logout()
+        clearFavorites()
+    }
 
     return (
         isLoggedIn
-            ? <button onClick={logout}>Cerrar sesión</button>
-            : <button onClick={login} >Iniciar sesión</button>
+            ? <button onClick={handleLogout}>Cerrar sesión</button>
+            : <NavLink to="/login"><button>Iniciar sesión</button></NavLink>
     )
 }
 
@@ -55,7 +61,7 @@ export function Header() {
                 }
             </nav>
 
-            <HeaderUSerButton />
+            <HeaderUserButton />
         </header>
     )
 }
